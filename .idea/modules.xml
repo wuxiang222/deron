@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/deron.iml" filepath="$PROJECT_DIR$/deron.iml" />
       <module fileurl="file://$PROJECT_DIR$/weblearn/weblearn.iml" filepath="$PROJECT_DIR$/weblearn/weblearn.iml" />
     </modules>
   </component>
