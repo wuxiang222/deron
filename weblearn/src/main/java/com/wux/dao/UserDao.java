@@ -12,6 +12,8 @@ import java.util.List;
  */
 @Repository
 public interface UserDao {
+    // 根据用户名查询
+    User findUserByName(@Param("name") String name);
     // 根据用户名和密码查询
     User findUser(@Param("name") String name, @Param("password") String password);
     // 查询所有用户

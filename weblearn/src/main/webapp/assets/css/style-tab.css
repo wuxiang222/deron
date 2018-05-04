@@ -1,0 +1,18 @@
+
+*{margin:0;padding:0;box-sizing: content-box;}
+ul,li{list-style: none;}
+body{font-size: 12px;font-family: "微软雅黑"; padding: 100px;}
+
+
+/****************** start 选项卡插件 *****************/
+.tab-wx{width: 300px;}
+.tab-wx .tab-nav{height: 30px;}
+.tab-wx .tab-nav li{float: left;margin-right: 5px;background-color: #767676;border-radius: 3px 3px 0 0;}
+.tab-wx .tab-nav li>a{display: block;height: 30px; padding: 0 20px; color: #fff;line-height: 30px;text-decoration: none;}
+.tab-wx .tab-nav li.active{background-color: #fff;}
+.tab-wx .tab-nav li.active>a{color: #777;}
+.content-wrap{height: 200px;border: 3px solid #fff;position: relative;}
+.content-wrap .content-item{width: 100%; height: 100%; display: none;position: absolute;}
+.content-wrap .content-item.current{display: block;}
+.content-wrap .content-item>img{width: 100%; height: 100%;}
+/****************** end 选项卡插件 *****************/

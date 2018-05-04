@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 配置文件约束 did = document type definition 如:struts / mybatis xsd = xml schema 
+	definition 如：spring -->
+<!-- 根标签 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   					   http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	   					   http://www.springframework.org/schema/aop
+	   					   http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+	   					   http://www.springframework.org/schema/tx
+	   					   http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+	   					   http://www.springframework.org/schema/context
+	   					   http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<!-- 配置spring的代理对象ShiroFilter -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- 配置Shiro的loginUrl -->
+		<property name="loginUrl" value="/login.jsp"></property>
+		<!-- 配置Shiro的心脏 -->
+		<property name="securityManager" ref="securityManager"></property>
+		<!-- 过滤器规则 -->
+		<property name="filterChainDefinitions">
+			<value>
+				/user/login=anon
+				/user/logout=logout
+				/views/**=user
+			</value>
+		</property>
+	</bean>
+
+	<!-- 配置SecurityManager -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<!-- 配置realm -->
+		<property name="realm" ref="realm"></property>
+
+		<property name="rememberMeManager" ref="cookieRememberManager"></property>
+	</bean>
+
+	<!-- 数据源 -->
+	<bean id="realm" class="com.wux.realm.AuthenByAccountRealm">
+		<!--<property name="credentialsMatcher" ref="hashCredentialMatcher"></property>-->
+	</bean>
+	<!-- 声明密码匹配器 -->
+	<bean id="hashCredentialMatcher"
+		  class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+		<!-- 算法 -->
+		<property name="hashAlgorithmName" value="md5"></property>
+		<!-- 加密次数 -->
+		<property name="hashIterations" value="1"></property>
+		<!-- 盐 -->
+		<property name="hashSalted" value="true"></property>
+	</bean>
+
+	<!-- 声明CookieRememberMeManager -->
+	<bean id="cookieRememberManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+		<property name="cookie" ref="cookied"></property>
+	</bean>
+	<!-- 创建一个Cookie对象 -->
+	<bean id="cookied" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<!-- 声明Cookie的名字 -->
+		<property name="name" value="rememberMe"></property>
+		<!-- 声明Cookie的生命 -->
+		<property name="maxAge" value="600"></property>
+	</bean>
+
+	<!--<aop:config proxy-target-class="true"></aop:config>-->
+	<bean
+	class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+</beans>

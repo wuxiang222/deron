@@ -1,0 +1,39 @@
+.flex-container{
+	!*将对象作为弹性伸缩盒显示*!
+	display: flex;
+	!*排列方向*!
+	flex-direction: row|row-reverse|column|column-reverse;
+	!*是否换行*!
+	flex-wrap: nowrap|wrap|wrap-reverse;
+	!*排列方向*! !*是否换行*!
+	flex-flow: column wrap-reverse;
+	!*水平对齐*!
+	justify-content: flex-start|flex-end|center|space-between|space-around;
+	!*垂直对齐*!
+	align-items: flex-start|flex-end|center|baseline|stretch;
+	!*多行元素的垂直对齐*!
+	align-content: flex-start|flex-end|center|space-between|space-around|stretch;
+}
+
+.flex-container .flex-item{
+	!*排列顺序设置，默认值0*!
+	order: 0;
+	!*占用剩余空间，默认值0*!
+	flex-grow: 1;
+	!*挤压收缩，默认值1*!
+	flex-shrink: 3;
+	!*伸缩，默认值auto*!
+	flex-basis: 100px;
+	!*flex-grow flex-shrink flex-basis缩写，默认值：0 1 auto。*!
+	flex: 1;  !*等于*!  flex-grow: 1;
+	!*单个垂直对齐方法*!
+	align-self: auto、flex-start、flex-end、center、baseline、stretch*;
+}
+
+/* 范例 */
+.container{display: flex;flex-direction: column;}
+	.top{height: 100px;}
+	.bottom{height: 50px;}
+	.middle{flex: 1;display: flex;}
+		.left{width: 200px;}
+		.right{flex: 1;overflow: auto;}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wux.dao.CarouselDao">
+    <resultMap type="Carousel" id="carouselMap">
+        <id column="id" property="id" />
+        <result column="realname" property="realname" />
+        <result column="imgurl" property="imgurl" />
+        <result column="description" property="description" />
+        <result column="onstatus" property="onstatus" />
+
+
+    </resultMap>
+
+    <sql id="show">
+        id, realname, imgurl, description, onstatus
+    </sql>
+
+    <select id="findCarousel" resultMap="carouselMap">
+        select <include refid="show" />
+        from carousel
+        where id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="carouselMap">
+        select  <include refid="show" />
+        from carousel
+    </select>
+
+    <insert id="addCarousel">
+        <selectKey keyProperty="id" order="AFTER" resultType="Integer">
+          SELECT last_insert_id();
+        </selectKey>
+        INSERT INTO carousel VALUES ( #{id}, #{realname}, #{imgurl}, #{description}, #{onstatus} )
+    </insert>
+
+    <delete id="removeCarousel">
+        DELETE FROM carousel
+        WHERE id = #{id}
+    </delete>
+
+    <update id="modifyCarousel">
+        UPDATE carousel
+        set realname=#{realname}, imgurl=#{imgurl}, description=#{description}, onstatus=#{description}
+        WHERE id=#{id}
+    </update>
+</mapper>

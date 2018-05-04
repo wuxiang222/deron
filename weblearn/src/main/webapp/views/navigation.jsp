@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib uri="http://shiro.apache.org/tags" prefix="shiro"%>
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
-    <div class="container-fluid">
+    <div class="container-fluid container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse"
                     data-target="#example-navbar-collapse">
@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">菜鸟教程</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">Deron</a>
         </div>
         <div class="collapse navbar-collapse" id="example-navbar-collapse">
             <ul class="nav navbar-nav">
@@ -32,9 +32,16 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a><shiro:principal/>，你好</a></li>
-                <li><a id="logout" href="../user/login" class="btn  btn-link">注销</a></li>
+                <li><a>WELCOME <shiro:principal /></a></li>
+                <li><a href="${pageContext.request.contextPath}/user/logout" class="btn  btn-link">注销</a></li>
             </ul>
+            <form class="navbar-form navbar-right" action="${pageContext.request.contextPath}/user/login">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="name" placeholder="账号">
+                    <input type="text" class="form-control" name="password" placeholder="密码">
+                </div>
+                <button type="submit" class="btn btn-default">登录</button>
+            </form>
         </div>
     </div>
 </nav>

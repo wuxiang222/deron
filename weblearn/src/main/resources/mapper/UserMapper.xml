@@ -8,9 +8,20 @@
         <result column="remark" property="remark" />
 
     </resultMap>
+
+    <sql id="show">
+        id, name, password, remark
+    </sql>
+
+    <!-- 通过用户名查询用户 -->
+    <select id="findUserByName" resultMap="userMap">
+        select <include refid="show" />
+        from users
+        where name = #{name}
+    </select>
     <!-- 通过用户名 和 密码查询用户 -->
     <select id="findUser" resultMap="userMap">
-        select  id, name, password, remark
+        select  <include refid="show" />
         from users
         where name = #{name} and password = #{password}
     </select>

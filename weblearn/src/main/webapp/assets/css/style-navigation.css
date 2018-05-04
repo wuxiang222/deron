@@ -1,0 +1,18 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td { margin:0; padding:0; }
+ul,ol{list-style-type:none;}
+h1, h2, h3, h4, h5, h6{ font-size:100%; }
+a{text-decoration:none;}
+a:hover,a:active,a:focus{color:#c00;text-decoration:underline;}
+button, input, select, textarea { font-size:100%; }   
+table { border-collapse:collapse; border-spacing:0; }
+
+
+
+/********************** start 导航栏 ***********************/
+.navigation-wx{border-bottom: 5px solid #dda;position: fixed;width: 100%;}
+.navigation-wx ul {background-color: rgba(180,210,200,0.5);list-style-type: none;font-weight: bold;height: 50px;display: flex;justify-content:space-around;}
+.navigation-wx ul span{text-align: center;line-height: 50px;flex-grow: 1.5;font-size: 2em;}
+.navigation-wx ul li{text-align: center;flex-grow: 1;}
+.navigation-wx ul li a{display: block;line-height: 50px;text-decoration: none;font-size: 1em;border-radius: 4px 4px 0 0;}
+.navigation-wx ul li a:hover {background-color: #555;color: white;}
+/********************** start 导航栏 ***********************/

@@ -11,6 +11,8 @@ import java.util.List;
  * on 2018/4/18.
  */
 public interface UserService {
+    // 根据用户名查询
+    User findUserByName(String name);
     // 根据用户名和密码查询
     User findUser(String name, String password);
     // 查询所有用户

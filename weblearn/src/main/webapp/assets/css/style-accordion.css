@@ -1,0 +1,10 @@
+body,ul,li{margin: 0 auto;padding: 0;}  
+
+
+/****************** start 手风琴插件 *****************/
+ul{list-style-type: none;cursor: pointer;color: white;line-height: 30px;text-align: center;} 
+ul span{background-color: #111;display: block;font-weight: bold;border-bottom: 1px solid #ccc;border-radius: 5px;}  
+ul span:hover{background-color: blue;} 
+ul li{background-color: darkslateblue ;border-bottom: 1px solid #ddd;border-radius: 15px;display: none;}  
+ul li:hover{background-color: darkslategray;} 
+/****************** end 手风琴插件 *****************/

@@ -1,0 +1,57 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td { margin:0; padding:0; }
+ul,ol{list-style-type:none;}
+h1, h2, h3, h4, h5, h6{ font-size:100%; }
+a{text-decoration:none;}
+a:hover,a:active,a:focus{color:#c00;text-decoration:underline;}
+button, input, select, textarea { font-size:100%; }   
+table { border-collapse:collapse; border-spacing:0; }
+
+
+/****************** start 弹性布局 *****************/
+.flex-wrap{width: 90%;min-height: 609px;margin: 0 auto;display: flex;flex-direction: column;}
+.flex-wrap header{height: 100px;background-color: #aaa;}
+.flex-wrap footer{height: 80px;background-color: #ccc;}
+.flex-wrap .flex-container{flex-grow: 1;display: flex;}
+.flex-wrap .flex-container aside{width: 200px;background-color: #ded;}
+.flex-wrap .flex-container main{flex-grow: 1;overflow: auto;margin-left:5px;background-color: #ede;}
+/****************** end 弹性布局 *****************/
+
+
+
+/****************** start 手风琴插件 *****************/
+ul{list-style-type: none;cursor: pointer;color: white;line-height: 30px;text-align: center;} 
+ul span{background-color: #111;display: block;font-weight: bold;border-bottom: 1px solid #ccc;border-radius: 5px;}  
+ul span:hover{background-color: blue;} 
+ul li{background-color: darkslateblue ;border-bottom: 1px solid #ddd;border-radius: 15px;display: none;}  
+ul li:hover{background-color: darkslategray;} 
+/****************** end 手风琴插件 *****************/
+
+
+
+/****************** start 选项卡插件 *****************/
+.tab-wx{width: 300px;}
+.tab-wx .tab-nav{height: 30px;}
+.tab-wx .tab-nav li{float: left;margin-right: 5px;background-color: #767676;border-radius: 3px 3px 0 0;}
+.tab-wx .tab-nav li>a{display: block;height: 30px; padding: 0 20px; color: #fff;line-height: 30px;text-decoration: none;}
+.tab-wx .tab-nav li.active{background-color: #fff;}
+.tab-wx .tab-nav li.active>a{color: #777;}
+.content-wrap{height: 200px;border: 3px solid #fff;position: relative;}
+.content-wrap .content-item{width: 100%; height: 100%; display: none;position: absolute;}
+.content-wrap .content-item>img{width: 100%; height: 100%;}
+.content-wrap .content-item.current{display: block;}
+/****************** end 选项卡插件 *****************/
+
+
+
+/* start 一个变色动画 */
+
+@keyframes mymove
+{
+	from {background-color:#4f0;}
+	to {background-color:#f2f;}
+}
+.flex-wrap .flex-container main{
+	animation: mymove 60s infinite;
+}
+
+/* end 一个变色动画 */

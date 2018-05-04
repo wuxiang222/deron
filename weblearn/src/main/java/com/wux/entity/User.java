@@ -3,11 +3,13 @@ package com.wux.entity;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
+
 /**
  * Created by wuxiang
  * on 2018/4/18.
  */
-public class User {
+public class User implements Serializable {
     private Integer id;
     private String name;
     private String password;

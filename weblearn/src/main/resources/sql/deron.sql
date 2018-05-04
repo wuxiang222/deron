@@ -52,3 +52,13 @@ create table if not exists menus(
     auth_id int unsigned,#权限对应id
     img_url varchar(200)#菜单图片对应的链接
 );
+
+#轮播图
+drop table if exists carousel cascade;
+create table if not exists carousel(
+    id int unsigned primary key auto_increment,#轮播图id
+    realname VARCHAR(100),#图片名称
+    imgurl varchar(200),#图片对应的链接
+    description varchar(1024),#描述
+    onstatus tinyint #轮播状态
+);

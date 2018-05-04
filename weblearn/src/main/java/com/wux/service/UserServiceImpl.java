@@ -2,6 +2,7 @@ package com.wux.service;
 
 import com.wux.dao.UserDao;
 import com.wux.entity.User;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
     @Override
+    public User findUserByName(String name) {
+        return userDao.findUserByName(name);
+    }
+    @Override
+    @RequiresRoles("admin")
     public User findUser(String name, String password) {
         return userDao.findUser(name, password);
     }

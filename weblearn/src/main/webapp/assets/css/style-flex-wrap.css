@@ -1,0 +1,12 @@
+
+*{margin:0;padding:0;box-sizing: content-box;}
+ul,li{list-style: none;}
+
+/****************** start 弹性布局 *****************/
+.flex-wrap{width: 100%;min-height: 609px;margin: 0 auto;display: flex;flex-direction: column;}
+.flex-wrap header{height: 100px;background-color: #aaa;}
+.flex-wrap footer{height: 80px;background-color: #ccc;}
+.flex-wrap .flex-container{flex-grow: 1;display: flex;}
+.flex-wrap .flex-container aside{width: 200px;background-color: #ded;}
+.flex-wrap .flex-container main{flex-grow: 1;overflow: auto;margin-left:5px;background-color: #ede;}
+/****************** end 弹性布局 *****************/
