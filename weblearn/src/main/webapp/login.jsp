@@ -1,5 +1,4 @@
 <%--
-<%--
   Created by IntelliJ IDEA.
   User: wuxiang
   Date: 2018/4/18
@@ -7,24 +6,26 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <html>
 <head>
     <title>登录</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <style>
-        .container{
-            width:500px; height:300px;margin:200px auto 0; background-color: #ede;
+        #container{
+            width:500px; height:300px;margin:100px auto 0; background-color: #ede;
             padding: 40px 10px;
         }
     </style>
-    <script src="js/jquery-1.11.2.js"></script>
+    <script src="assets/js/jquery-1.11.2.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="container">
+<%@include file="views/navigation.jsp"%>
+    <div id="container">
         <form id="loginForm" action="${pageContext.request.contextPath}/user/login" method="post" >
-            <h2 class="text-center">Please sign in</h2>
+            <h2 class="text-center">登录</h2>
             <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">用户名</label>
                 <div class="col-sm-10">

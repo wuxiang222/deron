@@ -13,16 +13,27 @@ public class User implements Serializable {
     private Integer id;
     private String name;
     private String password;
+    private String salt;
     private String remark;
 
     public User() {
 
     }
-    public User(Integer id, String name, String password, String remark) {
+
+    public User(Integer id, String name, String password, String salt, String remark) {
         this.id = id;
         this.name = name;
         this.password = password;
+        this.salt = salt;
         this.remark = remark;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public Integer getId() {
@@ -56,13 +67,14 @@ public class User implements Serializable {
     public void setRemark(String remark) {
         this.remark = remark;
     }
-
+    
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
+                ", salt='" + salt + '\'' +
                 ", remark='" + remark + '\'' +
                 '}';
     }

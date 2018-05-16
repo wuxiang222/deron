@@ -10,7 +10,7 @@
     </resultMap>
 
     <sql id="show">
-        id, name, password, remark
+      id, name, password,salt, remark
     </sql>
 
     <!-- 通过用户名查询用户 -->
@@ -35,7 +35,7 @@
         <selectKey keyProperty="id" order="AFTER" resultType="Integer">
           SELECT last_insert_id();
         </selectKey>
-        INSERT INTO users VALUES ( #{id}, #{name}, #{password}, #{remark} )
+        INSERT INTO users VALUES ( #{id}, #{name}, #{password},#{salt}, #{remark} )
     </insert>
     <!-- 删除用户 -->
     <delete id="removeUser">

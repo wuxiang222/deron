@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Note</title>
+    <link rel="stylesheet" type="text/css"
+          href="../back/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../back/easyui/themes/icon.css">
+    <script type="text/javascript" src="../assets/js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="../back/easyui/jquery.easyui.min.js"></script>
+    <script src="../assets/js/ulist-wx.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="layout" class="easyui-layout" style="width: 600px; height: 400px">
+    <div data-options="region:'east'" style="width:40%;border:1px solid black">
+      <div id="box" data-config="url:'../assets/json/data-table.json',aaa:'fff'">
+        <!-- js添加<ul><li> -->
+      </div>
+    </div>
+    <div data-options="region:'center'" style="border:1px solid black"></div>
+</div>
+<script>
+    $("#layout").layout({
+        fit:true
+    })
+
+    $('#box').ulist();
+
+</script>
+</body>

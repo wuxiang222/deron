@@ -19,8 +19,8 @@
 		accordion: function(url){
 			this.load(url, function(data, status, xhr){
 				$accordion = $(this)
-				var jsonArr = JSON.parse(data);
 				if(status=="success"){
+				var jsonArr = JSON.parse(data);
 					$accordion.html('');
 					$.each(jsonArr,function(index, item){
 						// item = {"":[]}

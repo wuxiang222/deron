@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.wux.dao.SpecialDao">
+	<resultMap type="Special" id="specialMap">
+		<id property="id" column="special_id"/>
+		<result property="name" column="special_name"/>
+		<result property="realname" column="special_realname"/>
+		<result property="type" column="special_type"/>
+		<result property="url" column="special_url"/>
+		<result property="author" column="special_author"/>
+		<result property="broadcast" column="special_broadcast"/>
+		<result property="level" column="special_level"/>
+		<result property="publish" column="special_publish"/>
+		<result property="status" column="special_status"/>
+		<result property="guru_id" column="special_guru_id"/>
+		<collection property="children" javaType="java.util.List" ofType="Voice">
+			<id property="id" column="voice_id"/>
+			<result property="name" column="voice_name"/>
+			<result property="realname" column="voice_realname"/>
+			<result property="type" column="voice_type"/>
+			<result property="url" column="voice_url"/>
+			<result property="status" column="voice_status"/>
+			<result property="publish" column="voice_publish"/>
+			<result property="specialID" column="voice_specialID"/>
+		</collection>
+	</resultMap>
+	<select id="queryByPage" resultMap="specialMap">
+		select s.id as special_id,s.name as special_name,s.realname as special_realname,s.type as special_type,s.url as special_url,s.author as special_author,s.broadcast as special_broadcast,s.level as special_level,s.publish as special_publish,s.status as special_status,s.guru_id as special_guru_id,
+			v.id as voice_id,v.name as voice_name,v.realname as voice_realname,v.type as voice_type,v.url as voice_url,v.status as voice_status,v.publish as voice_publish,v.special_id as voice_specialID
+		from special s
+		left join voice v
+		on s.id=v.special_id 
+		order by s.publish desc
+		limit #{begin},#{rows}
+	</select>
+	
+	<select id="queryCount" resultType="Integer">
+		select count(*) from special
+	</select>
+     
+     <select id="selectById" resultMap="specialMap">
+     	 select s.id as special_id,s.name as special_name,s.realname as special_realname,s.type as special_type,s.url as special_url,s.author as special_author,s.broadcast as special_broadcast,s.level as special_level,s.publish as special_publish,s.status as special_status,s.guru_id as special_guru_id,
+			v.id as voice_id,v.name as voice_name,v.realname as voice_realname,v.type as voice_type,v.url as voice_url,v.status as voice_status,v.publish as voice_publish,v.special_id as voice_specialID
+		from special s
+		left join voice v
+		on s.id=v.special_id 
+     	 where s.id = #{id}
+     </select>
+    <delete id="del">
+    	delete from special where id = #{id}
+    </delete> 
+    
+    <insert id="add">
+    	insert into special(id,name,realname,type,url,author,broadcast,publish,status,content) 
+			values(#{id},#{name},#{realname},#{type},#{url},#{author},#{broadcast},#{publish},#{status},#{content})
+    </insert>
+    
+    <update id="update">
+    	update special set name=#{name},author=#{author},broadcast=#{broadcast},content=#{content},publish=#{publish}
+		where id=#{id}
+    </update>
+</mapper>

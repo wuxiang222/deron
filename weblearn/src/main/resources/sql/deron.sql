@@ -5,7 +5,7 @@ drop table if exists roleAuthority cascade;
 drop table if exists users cascade;
 drop table if exists roles cascade;
 drop table if exists authoritys cascade;
-drop table if exists menus cascade;
+
 #权限表
 create table if not exists authoritys(
     id int unsigned primary key auto_increment,#权限id
@@ -27,10 +27,12 @@ create table if not exists roleAuthority(
     foreign key(authority_id) references authoritys(id)#外键权限id 引用权限表权限id
 );
 #用户表
+drop table if exists users cascade;
 create table if not exists users(
     id int unsigned primary key auto_increment,#用户id
     name varchar(24) not null unique,#用户名称
-    password char(20) not null,#密码
+    password char(32) not null,#密码
+    salt char(4),#盐
     remark varchar(200)#备注
 );
 #用户角色表
@@ -42,17 +44,28 @@ create table if not exists userRole(
     foreign key(role_id) references roles(id)#外键角色id 引用角色表角色id
 );
 #菜单表
+drop table if exists notes cascade;
+drop table if exists menus cascade;
 create table if not exists menus(
     id int unsigned primary key auto_increment,#菜单id
-    name_ch varchar(100),#中文名字
-    name_en varchar(200),#英文名字
+    menu_name varchar(100),#中文名字
     parent_id int unsigned,#父节点id
     order_id int unsigned,#同一父节点下的排序
-    menu_auth varchar(200),#菜单对应的权限
     auth_id int unsigned,#权限对应id
     img_url varchar(200)#菜单图片对应的链接
 );
-
+alter table menus add constraint menus_ref_menus foreign key (parent_id)
+references menus(id);
+# 笔记表
+drop table if exists notes cascade;
+create table notes
+(
+    id INT(10) primary key AUTO_INCREMENT,
+    title VARCHAR(64) null,
+    content VARCHAR(2048) null,
+    menu_id INT UNSIGNED,
+    foreign key(menu_id) references menus(id)
+);
 #轮播图
 drop table if exists carousel cascade;
 create table if not exists carousel(
@@ -62,3 +75,5 @@ create table if not exists carousel(
     description varchar(1024),#描述
     onstatus tinyint #轮播状态
 );
+
+

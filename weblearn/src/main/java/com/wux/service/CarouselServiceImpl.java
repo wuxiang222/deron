@@ -18,7 +18,7 @@ public class CarouselServiceImpl implements CarouselService {
     private CarouselDao carouselDao;
 
     @Override
-    public Carousel findCarousel(String id) {
+    public Carousel findCarousel(Integer id) {
         return carouselDao.findCarousel(id);
     }
 

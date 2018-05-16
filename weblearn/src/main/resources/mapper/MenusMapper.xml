@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wux.dao.MenusDao">
+	<resultMap type="Menus" id="menusMap">
+		<id column="id" property="id" />
+		<result property="menuName" column="menu_name" />
+		<result property="orderId" column="order_id" />
+		<result property="authId" column="auth_id" />
+		<result property="imgUrl" column="img_url" />
+
+		<association property="parent" javaType="Menus">
+			<id property="id" column="pid" />
+			<result property="menuName" column="pmenu_name" />
+			<result property="orderId" column="porder_id" />
+			<result property="authId" column="pauth_id" />
+			<result property="imgUrl" column="pimg_url" />
+		</association>
+	</resultMap>
+
+	<!-- 查询菜单ONE -->
+	<select id="findMenus" resultMap="menusMap">
+		select m.id, m.menu_name, m.parent_id, m.order_id, m.auth_id, m.img_url,
+			p.id pid, p.menu_name pmenu_name, p.parent_id pparent_id, p.order_id porder_id,
+			p.auth_id pauth_id, p.img_url pimg_url
+		from menus m LEFT JOIN menus p ON m.parent_id = p.id
+		where m.id = #{id}
+	</select>
+
+	<!-- 查询菜单ALL -->
+	<select id="findAll" resultMap="menusMap">
+		select m.id, m.menu_name, m.parent_id, m.order_id, m.auth_id, m.img_url,
+			p.id pid, p.menu_name pmenu_name, p.parent_id pparent_id, p.order_id porder_id,
+			p.auth_id pauth_id, p.img_url pimg_url
+		from menus m LEFT JOIN menus p ON m.parent_id = p.id
+	</select>
+	<!-- 查询分页 -->
+	<select id="findPage" resultMap="menusMap">
+		select m.id, m.menu_name, m.parent_id, m.order_id, m.auth_id, m.img_url,
+			p.id pid, p.menu_name pmenu_name, p.parent_id pparent_id, p.order_id porder_id,
+			p.auth_id pauth_id, p.img_url pimg_url
+		from menus m LEFT JOIN menus p ON m.parent_id = p.id
+		LIMIT #{start}, #{pageSize}
+	</select>
+
+	<insert id="addMenus">
+		insert into menus values (#{id},#{menuName},#{parent.id},#{orderId},#{authId},#{imgUrl})
+	</insert>
+
+	<delete id="removeMenus">
+		delete from menus where id=#{id}
+	</delete>
+
+	<update id="modifyMenus">
+		update menus set menu_name=#{menuName},parent_id=#{parent.id},order_id=#{orderId},
+			auth_id=#{authId},img_url=#{imgUrl}
+		where id=#{id}
+	</update>
+	<!-- 查询总数 -->
+	<select id="count" resultType="Integer">
+		select count(*)
+		from menus
+	</select>
+</mapper>

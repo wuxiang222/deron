@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Repository
 public interface CarouselDao {
-    Carousel findCarousel(@Param("id") String id);
+    Carousel findCarousel(@Param("id") Integer id);
     List<Carousel> findAll();
     void addCarousel(Carousel carousel);
     void removeCarousel(@Param("id") Integer id);

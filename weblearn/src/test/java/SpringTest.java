@@ -37,7 +37,8 @@ public class SpringTest {
     }
     @Test
     public void testAddUser(){
-        userDao.addUser(new User(null, "haolai", "123456", "第二个用户"));
+//        userDao.addUser(new User(null, "haolai", "123456", "第二个用户"));
+        System.out.println("ddd");
     }
     @Test
     public void testRemoveUser(){
@@ -46,6 +47,7 @@ public class SpringTest {
     @Test
     public void testModifyUser(){
 //        userDao.modifyUser(new User(3, "wangwu", "123456", "第二个用户"));
-        userService.modifyUser(new User(3, "wangwu33", "123456", "第四个用户"));
+//        userService.modifyUser(new User(3, "wangwu33", "123456","abcd", "第四个用户"));
+        System.out.println("修改");
     }
 }

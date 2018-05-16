@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wux.dao.TrollImageDao">
+	<resultMap type="TrollImage" id="trollMap">
+		<id column="id" property="id" />
+		<result column="realname" property="realname" />
+		<result column="uuidname" property="uuidname" />
+		<result column="imgurl" property="imgurl" />
+		<result column="description" property="description" />
+		<result column="onstatus" property="onstatus" />
+		<result column="issave" property="issave" />
+		<result column="uptime" property="uptime" />
+	</resultMap>
+
+	<!-- 轮播图 -->
+	<!-- 定义两个sql片段，第一个对应字段名,id属性值任意并且唯一 -->
+	<sql id="key">
+		<trim suffixOverrides=",">
+			<if test="id!=null">
+				id,
+			</if>
+
+			<if test="realname!=null">
+				realname,
+			</if>
+
+			<if test="uuidname!=null">
+				uuidname,
+			</if>
+
+			<if test="imgurl!=null">
+				imgurl,
+			</if>
+
+			<if test="description!=null">
+				description,
+			</if>
+
+			<if test="onstatus!=null">
+				onstatus,
+			</if>
+
+			<if test="issave!=null">
+				issave,
+			</if>
+
+			<if test="uptime!=null">
+				uptime,
+			</if>
+		</trim>
+	</sql>
+
+
+	<!-- 定义第二个sql片段，第二个对应?，key属性值任意并且唯一 -->
+	<sql id="value">
+		<trim suffixOverrides=",">
+			<if test="id!=null">
+				#{id},
+			</if>
+
+			<if test="realname!=null">
+				#{realname},
+			</if>
+
+			<if test="uuidname!=null">
+				#{uuidname},
+			</if>
+
+			<if test="imgurl!=null">
+				#{imgurl},
+			</if>
+
+			<if test="description!=null">
+				#{description},
+			</if>
+
+			<if test="onstatus!=null">
+				#{onstatus},
+			</if>
+
+			<if test="issave!=null">
+				#{issave},
+			</if>
+
+			<if test="uptime!=null">
+				#{uptime},
+			</if>
+		</trim>
+	</sql>
+	<insert id="addTrollImage">
+		insert into trollimg(
+		<include refid="key" />
+		) values(
+		<include refid="value" />
+		);
+	</insert>
+
+
+	<!-- 查询产品总数 -->
+	<select id="selectTotalTrollImage" resultType="Integer">
+		select count(*)
+		from trollimg
+	</select>
+
+<!-- 分页查询产品 -->
+<select id="selectTrollImagesByPage" resultType="TrollImage">
+	select id,
+	realname, uuidname, imgurl, description, onstatus, issave, uptime
+	from trollimg 
+	where issave=true
+	 limit #{start}, #{pageSize}
+</select>
+
+	<update id="setTrollImage">
+		update trollimg
+		<trim prefix="set" suffixOverrides=",">
+			<if test="#{realname} != null">
+				realname=#{realname},
+			</if>
+			<if test="#{uuidname} != null">
+				uuidname=#{uuidname},
+			</if>
+			<if test="#{imgurl} != null">
+				imgurl=#{imgurl},
+			</if>
+			<if test="#{description} != null">
+				description=#{description},
+			</if>
+			<if test="#{onstatus} != null">
+				onstatus=#{onstatus},
+			</if>
+		</trim>
+		where id=#{id}
+	</update>
+
+	<update id="delTrollImage">
+		update trollimg set issave=false where id=#{id}
+	</update>
+	
+	
+</mapper> 

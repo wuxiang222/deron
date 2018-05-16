@@ -3,12 +3,18 @@ package com.wux.controller;
 import com.alibaba.fastjson.JSON;
 import com.wux.entity.Carousel;
 import com.wux.service.CarouselService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 /**
@@ -31,7 +37,7 @@ public class CarouselController {
 
     @RequestMapping(value = "findOne",produces = "text/plain; charset=utf-8")
     @ResponseBody
-    public String findOne(String id){
+    public String findOne(Integer id){
         return JSON.toJSONString(carouselService.findCarousel(id) );
     }
 

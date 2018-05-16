@@ -68,4 +68,6 @@
     <!-- 事务注解驱动器，需要包装DataSourceTransactionManager，说明了@Transactional注解切入的事务是由tx包装而来 -->
     <tx:annotation-driven transaction-manager="tx"></tx:annotation-driven>
 
+    <import resource="spring-shiro.xml"/>
+
 </beans>

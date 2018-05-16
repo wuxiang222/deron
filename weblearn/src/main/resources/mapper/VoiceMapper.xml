@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wux.dao.VoiceDao">
+	<select id="selectBySpecialID" resultType="Voice">
+		select id,name,realname,type,url,status,publish 
+		from voice
+		where special_id = #{specialID}
+	</select>
+     
+    <select id="selectById" resultType="Voice">
+    	select id,name,realname,type,url,status,publish 
+		from voice
+		where id = #{id}
+    </select>
+    
+    <delete id="deleteVoiceById">
+    	delete from voice
+    	where id = #{id}
+    </delete>
+    
+    <delete id="deleteBySpecialID">
+    	delete from voice
+    	where special_id = #{specialID}
+    </delete>
+    
+    <insert id="insertVoice">
+    	insert into voice(id,name,realname,type,url,status,publish,special_id) 
+		            values(#{id},#{name},#{realname},#{type},#{url},#{status},#{publish},#{specialID})
+    </insert>
+    
+    <update id="updateVoiceById">
+		update voice set name = #{name}
+		where id = #{id}
+	</update>
+</mapper>

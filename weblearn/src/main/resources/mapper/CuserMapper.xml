@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wux.dao.CuserDao">
+	<resultMap type="Cuser" id="cuserMap">
+		<id column="user_id" property="user_id" />
+		<result column="cmanage_id" property="cmanage_id" />
+		<result column="username" property="username" />
+		<result column="password" property="password" />
+	</resultMap>
+
+	<!-- 轮播图 -->
+	<!-- 定义两个sql片段，第一个对应字段名,id属性值任意并且唯一 -->
+	<sql id="key">
+		<trim suffixOverrides=",">
+			<if test="user_id!=null">
+				user_id,
+			</if>
+
+			<if test="cmanage_id!=null">
+				cmanage_id,
+			</if>
+
+			<if test="username!=null">
+				username,
+			</if>
+
+			<if test="password!=null">
+				password,
+			</if>
+		</trim>
+	</sql>
+
+
+	<!-- 定义第二个sql片段，第二个对应?，key属性值任意并且唯一 -->
+	<sql id="value">
+		<trim suffixOverrides=",">
+			<if test="user_id!=null">
+				#{user_id},
+			</if>
+
+			<if test="cmanage_id!=null">
+				#{cmanage_id},
+			</if>
+
+			<if test="username!=null">
+				#{username},
+			</if>
+
+			<if test="password!=null">
+				#{password},
+			</if>
+		</trim>
+	</sql>
+	<insert id="insertCuser">
+		insert into cuser(
+		<include refid="key" />
+		) values(
+		<include refid="value" />
+		);
+	</insert>
+
+
+	<!-- 查询产品总数 -->
+	<select id="showTotalCuser" resultType="Integer">
+		select count(*)
+		from cuser
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="showCuser" resultType="Cuser">
+		select user_id,
+		cmanage_id,
+		username, password
+		from cuser
+		limit #{start}, #{pageSize}
+
+	</select>
+
+	<update id="updateCuser">
+		update cuser
+		<trim prefix="set" suffixOverrides=",">
+			<if test="#{cmanage_id} != null">
+				cmanage_id=#{cmanage_id},
+			</if>
+			<if test="#{username} != null">
+				username=#{username},
+			</if>
+			<if test="#{password} != null">
+				password=#{password},
+			</if>
+		</trim>
+		where user_id=#{user_id}
+	</update>
+
+	<update id="removeCuser">
+		delete from cuser where user_id=#{user_id}
+	</update>
+	
+	<select id="login" resultType="Cuser">
+		select user_id,
+		cmanage_id,
+		username, password
+		from cuser
+		where username=#{username} and password=#{password}
+
+	</select>
+</mapper> 

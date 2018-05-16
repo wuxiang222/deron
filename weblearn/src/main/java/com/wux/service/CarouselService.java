@@ -11,7 +11,7 @@ import java.util.List;
  * on 2018/4/18.
  */
 public interface CarouselService {
-    Carousel findCarousel(@Param("id") String id);
+    Carousel findCarousel(@Param("id") Integer id);
     List<Carousel> findAll();
     void addCarousel(Carousel carousel);
     void removeCarousel(@Param("id") Integer id);

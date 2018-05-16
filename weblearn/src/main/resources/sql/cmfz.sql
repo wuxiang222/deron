@@ -16,12 +16,12 @@ drop table if exists menu;
 drop table if exists voice;
 drop table if exists special;
 
-drop table if exists trolling;
+drop table if exists trollimage;
 drop table if exists clog;
 
 
-drop table if exists user;
-drop table if exists manager;
+drop table if exists cuser;
+drop table if exists cmanager;
 
 /*==============================================================*/
 /* Table: article                                               */
@@ -34,18 +34,18 @@ create table article
 );
 
 /*==============================================================*/
-/* Table: manager                                               */
+/* Table: cmanager                                               */
 /*==============================================================*/
-create table manager
+create table cmanager
 (
-   manager_id           varchar(64) not null,  # 管理员编号*
+   cmanager_id           varchar(64) not null,  # 管理员编号*
    username             varchar(64) not null,  # 用户名
    password             varchar(64) not null,  # 密码
-   salt                 varchar(64) not null,  # 盐
+   salt                  char(6) not null,     # 盐
    isblock              tinyint,               # 锁
    portrait             varchar(64),           # 肖像
    fname                varchar(64),
-   primary key (manager_id)
+   primary key (cmanager_id)
 );
 
 /*==============================================================*/
@@ -62,12 +62,12 @@ create table counter
 );
 
 /*==============================================================*/
-/* Table: user                                                 */
+/* Table: cuser                                                 */
 /*==============================================================*/
-create table user
+create table cuser
 (
    user_id              varchar(64) not null,  # 用户编号
-   manager_id           varchar(64),           # 管理员编号
+   cmanager_id           varchar(64),           # 管理员编号
    username             varchar(64),           # 用户名
    password             varchar(64),           # 密码
    primary key (user_id)
@@ -122,9 +122,9 @@ create table special
 );
 
 /*==============================================================*/
-/* Table: trolling                                              */
+/* Table: trollimage                                              */
 /*==============================================================*/
-create table trolling
+create table trollimage
 (
    id                   varchar(64) not null,  # 编号*
    realname             varchar(64),           # 轮播图名称
@@ -165,19 +165,19 @@ create table clog
 );
 
 alter table article add constraint FK_Reference_5 foreign key (manage_id)
-      references manager (manager_id) on delete restrict on update restrict;
+      references cmanager (cmanager_id) on delete restrict on update restrict;
 
 alter table counter add constraint FK_Reference_4 foreign key (lesson_id)
       references lesson (lesson_id) on delete restrict on update restrict;
 
 alter table counter add constraint FK_Reference_8 foreign key (user_id)
-      references user (user_id) on delete restrict on update restrict;
+      references cuser (user_id) on delete restrict on update restrict;
 
-alter table user add constraint FK_Reference_3 foreign key (manager_id)
-      references manager (manager_id) on delete restrict on update restrict;
+alter table cuser add constraint FK_Reference_3 foreign key (cmanager_id)
+      references cmanager (cmanager_id) on delete restrict on update restrict;
 
 alter table lesson add constraint FK_Reference_7 foreign key (user_id)
-      references user (user_id) on delete restrict on update restrict;
+      references cuser (user_id) on delete restrict on update restrict;
 
 alter table menu add constraint FK_Reference_6 foreign key (sup_id)
       references menu (menu_id) on delete restrict on update restrict;

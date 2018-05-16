@@ -10,7 +10,7 @@
 </head>  
 <body>
 
-	<div id="accordion"></div>
+	<div id="accordion" class="accordion-wx"></div>
 
 	
 	<script type="text/javascript">
@@ -32,7 +32,7 @@
 
 
 		/* v2-js定制手风 */
-		$("#accordion").load("../assets/data/data-accordion.json",function(data, status, xhr){
+		$("#accordion").load("../assets/json/data-accordion.json",function(data, status, xhr){
 			$accordion = $(this)
 			var jsonArr = JSON.parse(data);
 			if(status=="success"){

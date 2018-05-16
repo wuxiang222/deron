@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wux.dao.NoteDao">
+   <resultMap id="noteMap" type="Note">
+       <id property="id" column="id" />
+       <result property="title" column="title"/>
+       <result property="content" column="content"/>
+       <result property="menuId" column="menu_id"/>
+   </resultMap>
+
+   <select id="getNote" resultMap="noteMap">
+       SELECT id,title, content,menu_id
+       FROM notes
+       WHERE id=#{id}
+   </select>
+   <select id="getAllNote" resultMap="noteMap">
+       SELECT id,title, content,menu_id
+       FROM notes;
+   </select>
+
+    <insert id="postNote">
+        INSERT INTO notes VALUES (#{id}, #{title}, #{content}, #{menuId});
+    </insert>
+
+    <delete id="deleteNote">
+        DELETE FROM notes
+        WHERE id = ${id}
+    </delete>
+
+    <update id="putNote">
+        UPDATE notes
+        SET title = #{title}, content = #{content}, menu_id=#{menuId}
+        WHERE id = #{id}
+    </update>
+</mapper>

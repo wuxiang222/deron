@@ -2,6 +2,7 @@ package com.wux.service;
 
 import com.wux.dao.UserDao;
 import com.wux.entity.User;
+import com.wux.util.MD5Util;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) {
+        // 生成盐
+        String salt = MD5Util.getSalt(4);
+
         userDao.addUser(user);
     }
 

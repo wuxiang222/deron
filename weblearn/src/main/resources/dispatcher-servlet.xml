@@ -30,12 +30,35 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
+
 	<!-- 视图解析器 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/views/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
-	
+
+	<!-- 验证码送入工厂 -->
+	<bean id="captcha" class="com.google.code.kaptcha.servlet.KaptchaExtend">
+		<constructor-arg>
+			<props>
+				<prop key="kaptcha.border">no</prop>
+				<!-- session.setAttribute("code","xxxxxx"); -->
+				<prop key="kaptcha.session.key">code</prop>
+				<prop key="kaptcha.textproducer.char.length">4</prop>
+				<prop key="kaptcha.background.clear.from">211,229,237</prop>
+				<prop key="kaptcha.background.clear.to">211,239,235</prop>
+			</props>
+		</constructor-arg>
+	</bean>
+
+	<!-- 文件上传解析器   10M -->
+	<bean id="multipartResolver"
+		  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	</bean>
+
+
 	<!-- 访问静态资源 -->
 	<mvc:default-servlet-handler/>
+
+
 </beans>

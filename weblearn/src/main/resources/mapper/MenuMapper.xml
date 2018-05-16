@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wux.dao.MenuDao">
+	<resultMap type="Menu" id="menuMap">
+		<id column="menu_id" property="menu_id" />
+		<result column="menu_name" property="menu_name" />
+		<result column="menu_icon" property="menu_icon" />
+		<result column="href" property="href" />
+
+		<collection property="children" ofType="Menu">
+			<id column="smenu_id" property="menu_id" />
+			<result column="smenu_name" property="menu_name" />
+			<result column="smenu_icon" property="menu_icon" />
+			<result column="shref" property="href" />
+		</collection>
+	</resultMap>
+
+
+	<!-- 查询菜单 -->
+	<select id="selectMenuById" resultMap="menuMap">
+		select menu_id, menu_name, menu_icon
+		from menu
+		where menu_id = #{mid}
+	</select>
+
+	<!-- 查询子菜单 -->
+	<select id="selectSubMenu" resultMap="menuMap">
+		select m.menu_id menu_id, m.menu_name menu_name, m.menu_icon menu_icon, m.href href, s.menu_id smenu_id, s.menu_name smenu_name, s.menu_icon smenu_icon, s.href shref
+		from menu m inner join menu s on m.menu_id = s.sup_id
+		where m.sup_id = #{mid}
+	</select>
+
+
+
+</mapper>

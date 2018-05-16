@@ -20,14 +20,13 @@
 		/*
 			初始化参数 === 如果有配置参数，则扩展默认配置
 		*/
-		if (this.getConfig() ) {
-			/*
-				this.config      -- 默认参数对象
-				this.getconfig() -- 返回元素上定制参数对象
-				config           -- js定制对象 
-			*/
-			$.extend(this.config, this.getConfig(), config)
-		}
+		/*
+		 this.config      -- 默认参数对象
+		 this.getconfig() -- 返回元素上定制参数对象
+		 config           -- js定制对象
+		 */
+        var dataconfig =this.getConfig()
+        $.extend(this.config, dataconfig, config)
 		/*
 			结果参数对象
 		*/
